@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../assets/styles/todoMain.scss';
 import { TodoItem } from '../component/TodoItem';
 
-export function TodoMain({ todos, onChange, onDelete}) {
+export function TodoMain({ todos, onChange, onDelete }) {
   return (
     <div className='todo-Main'>
       <div className='main-title-cont'>
