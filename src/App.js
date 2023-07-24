@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TodoHeader } from './pages/todoHeader'
 import './App.css';
 import { TodoMain } from './pages/todoMain';
 import { TodoFooter } from './pages/todoFooter';
+import { PropagateLoader } from 'react-spinners';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [list, setList] = useState([
     {
         title: 'Learn ReactJS basics',
@@ -32,6 +34,20 @@ function App() {
         isDone: false
     }
 ])
+    useEffect(() => {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 5000);
+    }, []);
+
+    if (isLoading) {
+      return (
+        <div className="loader-container">
+          <h2>Loading</h2>
+          <PropagateLoader color="#14c2c3" size={25} />
+        </div>
+      );
+    }
   return (
     <div className="App">
       <div className='wrapper'>
@@ -45,6 +61,7 @@ function App() {
             }
           ])
         }}/>
+
         <TodoMain
           todos={list}
           onDelete={(todo) => {
@@ -60,6 +77,7 @@ function App() {
             ))
           }}
         />
+        
         <TodoFooter
           done={() => {
             setList(list.filter((todo) => !todo.isDone));
