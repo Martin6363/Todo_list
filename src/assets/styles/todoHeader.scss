@@ -41,6 +41,10 @@
     outline: none;
 }
 
+.input:focus {
+    border: 1.5px solid #16A3B7;
+}
+
 .form-input .input-button {
     height: 100%;
     padding: 7px 11px;

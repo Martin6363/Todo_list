@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import '../assets/styles/todoHeader.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBook } from '@fortawesome/free-solid-svg-icons'; 
@@ -6,18 +6,21 @@ import { faBook } from '@fortawesome/free-solid-svg-icons';
 
 export function TodoHeader({createList}) {
     const [text, setText] = useState("");
+    const inputRef = useRef('');
 
     const handleAddTask = (e) => {
         if (text.trim() !== "") {
           createList(text);
           setText("");
+        } else {
+            inputRef.current.focus()
         }
     };
     
     const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-        handleAddTask();
-    }
+        if (e.key === 'Enter') {
+            handleAddTask();
+        }
     };
 
     return (
@@ -38,6 +41,7 @@ export function TodoHeader({createList}) {
                             }} 
                             onKeyPress={handleKeyPress}
                             placeholder='New Todo'
+                            ref={inputRef}
                         />
                     </div>
                     <div className='form-button-cont'>
